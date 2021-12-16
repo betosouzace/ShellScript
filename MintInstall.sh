@@ -74,6 +74,7 @@ PROGRAMAS_PARA_INSTALAR=(
   libavcodec-extra
   ttf-mscorefonts-installer
   ubuntu-restricted-extras
+  apt-transport-https
   ffmpeg
   libavcodec-extra
   libdvdcss2
@@ -200,6 +201,15 @@ flatpak install flathub com.google.AndroidStudio -y
 
 sudo apt install -f
 
+# Balena Etcher
+curl -1sLf \
+  'https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh' |
+  sudo -E bash
+sudo apt-get update
+sudo apt-get install balena-etcher-electron
+
+
+# Atualizações
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoclean && sudo apt autoremove -y
 flatpak update
 sudo snap refresh
