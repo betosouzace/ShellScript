@@ -112,6 +112,7 @@ PROGRAMAS_PARA_INSTALAR=(
   gcc
   g++
   make
+  nodejs
   yarn
   npm
 )
@@ -132,7 +133,7 @@ sudo apt install curl -y
 sudo apt install software-properties-common -y
 
 ## Repositório Nodejs ##
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
@@ -208,6 +209,9 @@ curl -1sLf \
 sudo apt-get update
 sudo apt-get install balena-etcher-electron
 
+# Oh-my-zsh
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Atualizações
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoclean && sudo apt autoremove -y
@@ -242,6 +246,9 @@ sudo systemctl stop apache2.service
 sudo systemctl stop apache2
 sudo systemctl disable apache2
 sudo apt remove apache2 -y
+
+## Atalho Nodejs
+sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 ## Instalacao XAMPP 5.6 #
 if [ ! -d "/opt/lampp/etc" ]; then
