@@ -10,8 +10,17 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # ----------------------------- VARIÁVEIS ----------------------------- #
-GIT_USER="seuUsuarioGit"
-GIT_EMAIL="seuemailgit@email.com"
+# GIT_USER="seuUsuarioGit"
+# GIT_EMAIL="seuemailgit@email.com"
+
+# Ainda não testado
+read -p "Digite o username GIT :" GIT_USER
+read -p "Digite o email GIT :" GIT_EMAIL
+
+git config --global user.name "$GIT_USER"
+git config --global user.email "$GIT_EMAIL"
+git config --global core.editor vim
+git config --list
 
 PASTA_USUARIO=$HOME
 
@@ -40,7 +49,7 @@ sudo rm /var/cache/apt/archives/lock
 sudo dpkg --add-architecture i386
 
 sudo apt update -y
-# Para distros KDE
+# A linha abaixo é utilizada para distros baseadas no KDE Neon
 sudo pkcon update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
@@ -75,7 +84,7 @@ sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE focal main"
 
 sudo apt update -y
-# Para distros KDE
+# A linha abaixo é utilizada para distros baseadas no KDE Neon
 sudo pkcon update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
@@ -97,7 +106,7 @@ sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
 sudo apt install -f
 
 sudo apt update -y
-# Para distros KDE
+# A linha abaixo é utilizada para distros baseadas no KDE Neon
 sudo pkcon update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
@@ -106,7 +115,7 @@ sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && s
 sudo apt install apt-transport-https -y
 sudo apt install build-essential -y
 sudo apt install --install-recommends winehq-stable wine-stable wine-stable-i386 wine-stable-amd64 -y
-# Para Linux Mint:
+# A linha abaixo atualiza os codecs do Linux Mint:
 sudo apt install mint-meta-codecs -y
 sudo apt install dos2unix -y
 sudo apt install language-pack-gnome-pt language-pack-kde-pt language-pack-pt-base -y
@@ -160,11 +169,22 @@ sudo update-alternatives --set editor /usr/bin/code
 # # Se o Visual Studio Code não aparecer como alternativa ao editor, você precisará registrá-lo:
 # sudo update-alternatives --install /usr/bin/editor editor $(which code) 10
 
+# Criando instância 32 bits do wine
+sudo rm -rf "$PASTA_USUARIO/.wine"
+WINEPREFIX="$PASTA_USUARIO/.wine" WINEARCH=win32 wine wineboot
+
 ## Parar e remover serviço apache instalado com PHP 8 #
-sudo /etc/init.d/apache2 stop && sudo systemctl stop apache2.service && sudo systemctl stop apache2 && sudo systemctl disable apache2 && sudo apt remove apache2 -y
+sudo /etc/init.d/apache2 stop
+sudo systemctl stop apache2.service
+sudo systemctl stop apache2
+sudo systemctl disable apache2
+# # Fedora e derivados RedHat
+# sudo systemctl stop httpd
+# sudo systemctl disable httpd
+sudo apt remove apache2 -y
 
 sudo apt update -y
-# Para distros KDE
+# A linha abaixo é utilizada para distros baseadas no KDE Neon
 sudo pkcon update
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
@@ -189,11 +209,7 @@ flatpak update
 ## Apagando pasta de Downloads #
 sudo rm -rf "$DIRETORIO_DOWNLOADS"
 
-## Configuracao GIT #
-git config --global user.name "$GIT_USER"
-git config --global user.email "$GIT_EMAIL"
-git config --global core.editor vim
-git config --list
+## Configuracao SSH GIT para o github #
 ssh-keygen -t ed25519 -C "$GIT_EMAIL"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
