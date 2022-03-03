@@ -10,12 +10,14 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # ----------------------------- VARIÁVEIS ----------------------------- #
+
+read -p "Digite o username GIT :" GIT_USER
+read -p "Digite o email GIT :" GIT_EMAIL
+
 # GIT_USER="seuUsuarioGit"
 # GIT_EMAIL="seuemailgit@email.com"
 
-# Ainda não testado
-read -p "Digite o username GIT :" GIT_USER
-read -p "Digite o email GIT :" GIT_EMAIL
+sudo apt install git -y
 
 git config --global user.name "$GIT_USER"
 git config --global user.email "$GIT_EMAIL"
@@ -50,7 +52,7 @@ sudo dpkg --add-architecture i386
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update
+sudo pkcon update -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -85,7 +87,7 @@ sudo apt-add-repository "deb $URL_PPA_WINE focal main"
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update
+sudo pkcon update -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -107,7 +109,7 @@ sudo apt install -f
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update
+sudo pkcon update -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -185,7 +187,7 @@ sudo apt remove apache2 -y
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update
+sudo pkcon update -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
