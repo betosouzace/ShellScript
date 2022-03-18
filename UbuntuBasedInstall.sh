@@ -219,7 +219,7 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
 # ## Para instalar o XAMPP 5.5.38 descomente as linhas abaixo#
-# wget https://ufpr.dl.sourceforge.net/project/xampp/XAMPP Linux/5.5.38/xampp-linux-x64-5.5.38-3-installer.run
+# wget https://ufpr.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.5.38/xampp-linux-x64-5.5.38-3-installer.run
 # sudo chmod 755 xampp-linux-x64-5.5.38-3-installer.run
 # sudo ./xampp-linux-x64-5.5.38-3-installer.run --installer-language pt_BR
 # sudo rm xampp-linux*
