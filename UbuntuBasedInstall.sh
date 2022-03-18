@@ -147,6 +147,7 @@ sudo apt install gpart -y
 sudo apt install libvulkan1 libvulkan1:i386 libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 -y
 sudo apt install libsqlite3-0:i386 -y
 sudo apt install filezilla -y
+# plugin necessário para distros KDE
 sudo apt install network-manager-openvpn -y
 sudo apt install vim -y
 sudo apt install clang -y
