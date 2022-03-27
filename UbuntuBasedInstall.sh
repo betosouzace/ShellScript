@@ -39,6 +39,7 @@ URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.18.5-
 URL_ANYDESK="https://download.anydesk.com/linux/anydesk_6.1.1-1_amd64.deb"
 URL_FDM="https://dn3.freedownloadmanager.org/6/latest/freedownloadmanager.deb"
 URL_SKYPE="https://go.skype.com/skypeforlinux-64.deb"
+URL_TERMIUS="https://autoupdate.termius.com/linux/Termius.deb"
 URL_WORKB="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community_8.0.27-1ubuntu20.04_amd64.deb"
 
 DIRETORIO_DOWNLOADS="$PASTA_USUARIO/Downloads/programas"
@@ -98,6 +99,7 @@ wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$ANYDESK" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_FDM" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_VCODE" -P "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_TERMIUS" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_SKYPE" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_WORKB" -P "$DIRETORIO_DOWNLOADS"
 
