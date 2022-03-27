@@ -12,7 +12,7 @@ fi
 PASTA_USUARIO=$HOME
 
 sudo rm -rf /opt/lampp/htdocs/
-wget https://ufpr.dl.sourceforge.net/project/xampp/XAMPP Linux/5.5.38/xampp-linux-x64-5.5.38-3-installer.run
+wget https://ufpr.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.5.38/xampp-linux-x64-5.5.38-3-installer.run
 sudo chmod 755 xampp-linux-x64-5.5.38-3-installer.run
 sudo ./xampp-linux-x64-5.5.38-3-installer.run --mode text --installer-language pt_BR
 sudo rm xampp-linux*
