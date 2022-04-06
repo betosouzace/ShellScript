@@ -161,6 +161,8 @@ sudo apt install wget -y
 sudo apt install git git-flow -y
 sudo apt install zsh -y
 sudo apt install net-tools -y
+sudo apt install samba -y
+sudo apt install xrdp -y
 # PHP e extensões necessárias para o Laravel 9
 sudo apt install php8.0 php8.0-mysql php8.0-sqlite3 php8.0-gd php8.0-common php8.0-dom php8.0-bcmath openssl php8.0-mbstring -y
 sudo apt install nodejs -y
