@@ -164,7 +164,7 @@ sudo apt install net-tools -y
 sudo apt install samba -y
 sudo apt install xrdp -y
 # PHP e extensões necessárias para o Laravel 9
-sudo apt install mcrypt php8.1 php8.1-mcrypt php8.1-mysql php8.1-sqlite3 php8.1-gd php8.1-common php8.1-dom php8.1-bcmath openssl php8.1-mbstring php8.1-curl php8.1-xml php8.1-zip php8.1-cli -y
+sudo apt install openssl mcrypt php8.1 php8.1-mcrypt php8.1-common php8.1-mysql php8.1-sqlite3 php8.1-dom php8.1-bcmath php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-intl -y
 sudo apt install nodejs -y
 sudo apt install gcc -y
 sudo apt install g++ -y
