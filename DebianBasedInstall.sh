@@ -163,8 +163,8 @@ sudo apt install lsb-release ca-certificates apt-transport-https software-proper
 echo "deb https://packages.sury.org/php/ bullseye main" | sudo tee /etc/apt/sources.list.d/sury-php.list
 wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
-sudo apt install php8.1 php8.1-mysql php8.1-sqlite3 php8.1-gd php8.1-common php8.1-dom php8.1-bcmath openssl php8.1-mbstring -y
-sudo apt install php8.1-{bcmath,fpm,xml,mysql,zip,intl,ldap,gd,cli,bz2,curl,mbstring,pgsql,opcache,soap,cgi}
+sudo apt install openssl mcrypt php8.1 php8.1-mcrypt php8.1-common php8.1-mysql php8.1-sqlite3 php8.1-dom php8.1-bcmath php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-intl php8.1-cgi php8.1-pgsql php8.1-ldap -y
+sudo apt install php8.1-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
 sudo apt install nodejs -y
 sudo apt install gcc -y
 sudo apt install g++ -y
