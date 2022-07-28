@@ -36,7 +36,6 @@ URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
 URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
 URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.18.5-1_amd64.deb"
-URL_ANYDESK="https://download.anydesk.com/linux/anydesk_6.1.1-1_amd64.deb"
 URL_FDM="https://dn3.freedownloadmanager.org/6/latest/freedownloadmanager.deb"
 URL_SKYPE="https://go.skype.com/skypeforlinux-64.deb"
 URL_TERMIUS="https://autoupdate.termius.com/linux/Termius.deb"
@@ -96,7 +95,6 @@ sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && s
 mkdir "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_GOOGLE_CHROME" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$ANYDESK" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_FDM" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_VCODE" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_TERMIUS" -P "$DIRETORIO_DOWNLOADS"
@@ -186,6 +184,15 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
+# Anydesk
+sudo apt install software-properties-common apt-transport-https wget ca-certificates gnupg2 -y
+sudo wget -O- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add - | gpg --dearmor | sudo tee /usr/share/keyrings/anydesk.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
+
+wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
+sudo tee "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
+sudo apt update
+sudo apt install anydesk -y
 
 # instalação Spotify
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
