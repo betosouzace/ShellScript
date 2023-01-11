@@ -171,6 +171,9 @@ sudo apt install make -y
 sudo apt install yarn -y
 sudo apt install balena-etcher-electron -y
 sudo apt install code -y # or code-insiders
+# Necessário para o flutter
+sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
 
 # Docker
 sudo apt-get remove docker docker-engine docker.io containerd runc -y
