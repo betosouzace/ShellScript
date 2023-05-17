@@ -11,13 +11,13 @@ fi
 
 # ----------------------------- VARIÁVEIS ----------------------------- #
 
+sudo apt install git git-flow -y
+
 read -p "Digite o username GIT :" GIT_USER
 read -p "Digite o email GIT :" GIT_EMAIL
 
 # GIT_USER="seuUsuarioGit"
 # GIT_EMAIL="seuemailgit@email.com"
-
-sudo apt install git -y
 
 git config --global user.name "$GIT_USER"
 git config --global user.email "$GIT_EMAIL"
@@ -25,22 +25,17 @@ git config --global core.editor vim
 git config --global init.defaultBranch "main"
 git config --list
 
+git config --global core.editor vim
+git config --global init.defaultBranch main
+git config --global pull.rebase false
+
 PASTA_USUARIO=$HOME
 
-PPA_GIMP="ppa:ubuntuhandbook1/gimp"
-PPA_LIBRE="ppa:libreoffice/ppa"
-PPA_INKS="ppa:inkscape.dev/stable"
 PPA_PHP="ppa:ondrej/php"
-PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
 
-URL_WINE_KEY="https://dl.winehq.org/wine-builds/winehq.key"
-URL_PPA_WINE="https://dl.winehq.org/wine-builds/ubuntu/"
 URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.18.5-1_amd64.deb"
-URL_FDM="https://dn3.freedownloadmanager.org/6/latest/freedownloadmanager.deb"
-URL_SKYPE="https://go.skype.com/skypeforlinux-64.deb"
 URL_TERMIUS="https://autoupdate.termius.com/linux/Termius.deb"
-URL_WORKB="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community_8.0.27-1ubuntu20.04_amd64.deb"
+URL_WORKB="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community_8.0.33-1ubuntu22.04_amd64.deb"
 
 DIRETORIO_DOWNLOADS="$PASTA_USUARIO/Downloads/programas"
 
@@ -60,16 +55,6 @@ sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && s
 sudo apt install curl -y
 sudo apt install software-properties-common -y
 
-## Repositório Nodejs ##
-# curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-# curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-# echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-# Balena Etcher
-curl -1sLf \
-   'https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh' \
-   | sudo -E bash
-
 # Visual Studio Code
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
@@ -77,14 +62,7 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/p
 rm -f packages.microsoft.gpg
 
 ## Adicionando repositórios de terceiros e suporte a Snap (Driver Logitech, Lutris e Drivers Nvidia)##
-sudo add-apt-repository "$PPA_GIMP" -y
-sudo add-apt-repository "$PPA_INKS" -y
-sudo add-apt-repository "$PPA_LIBRE" -y
 sudo add-apt-repository "$PPA_PHP" -y
-sudo apt-add-repository "$PPA_GRAPHICS_DRIVERS" -y
-wget -nc "$URL_WINE_KEY"
-sudo apt-key add winehq.key
-sudo apt-add-repository "deb $URL_PPA_WINE focal main"
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
@@ -95,11 +73,7 @@ sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && s
 ## Download e instalaçao de programas externos ##
 mkdir "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_GOOGLE_CHROME" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_FDM" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_VCODE" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_TERMIUS" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_SKYPE" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_WORKB" -P "$DIRETORIO_DOWNLOADS"
 
 ## Experimental, não sei se vai funcionar
@@ -117,35 +91,16 @@ sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && s
 # As instalações estão separados para em caso de erro de algum pacote, os outros não deixem de ser instalados
 sudo apt install apt-transport-https -y
 sudo apt install build-essential -y
-sudo apt install --install-recommends winehq-stable wine-stable wine-stable-i386 wine-stable-amd64 -y
 # A linha abaixo atualiza os codecs do Linux Mint:
 sudo apt install mint-meta-codecs -y
 sudo apt install dos2unix -y
 sudo apt install language-pack-gnome-pt language-pack-kde-pt language-pack-pt-base -y
-sudo apt install winff -y
-sudo apt install guvcview -y
-sudo apt install flameshot -y
 sudo apt install steam-installer steam-devices steam:i386 -y
-sudo apt install ratbagd -y
-sudo apt install gimp gimp-gmic gmic gimp-plugin-registry -y
 sudo apt install p7zip-rar p7zip-full lzma lzma-dev rar unrar-free p7zip ark ncompress -y
-sudo apt install qt5-default -y
 sudo apt install vlc vlc-l10n -y
-sudo apt install gdebi-core -y
-sudo apt install gparted -y
-sudo apt install inkscape -y
-sudo apt install audacity -y
-sudo apt install libreoffice libreoffice-l10n-pt-br -y
-sudo apt install libreoffice-styl* -y
 sudo apt install firefox-locale-pt -y
-sudo apt install ttf-mscorefonts-installer -y
 sudo apt install ubuntu-restricted-extras -y
 # plugins de audio e vídeo
-sudo apt install libdvd-pkg ffmpeg libavcodec-extra libdvdcss2 -y
-sudo dpkg-reconfigure libdvd-pkg
-########
-sudo apt install gpart -y
-sudo apt install libvulkan1 libvulkan1:i386 libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 -y
 sudo apt install libsqlite3-0:i386 -y
 sudo apt install filezilla -y
 # plugin necessário para distros KDE
@@ -153,9 +108,6 @@ sudo apt install network-manager-openvpn -y
 sudo apt install vim -y
 sudo apt install clang -y
 sudo apt install cmake -y
-sudo apt install ninja-build -y
-sudo apt install pkg-config -y
-sudo apt install libgtk-3-dev -y
 sudo apt install wget -y
 sudo apt install git git-flow -y
 sudo apt install zsh -y
@@ -170,10 +122,8 @@ sudo apt install gcc -y
 sudo apt install g++ -y
 sudo apt install make -y
 # sudo apt install yarn -y
-sudo apt install balena-etcher-electron -y
 sudo apt install code -y # or code-insiders
 # Necessário para o flutter
-sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
 
 # Definindo zsh como shell padrão
 chsh -s $(which zsh)
@@ -182,43 +132,10 @@ sudo usermod -s /usr/bin/zsh $(whoami)
 chsh -s /bin/zsh
 sudo chsh -s /bin/zsh
 
-# Docker
-sudo apt-get remove docker docker-engine docker.io containerd runc -y
-sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg lsb-release -y
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  focal stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-sudo groupadd docker
-sudo usermod -aG docker $USER
-
-# Anydesk
-sudo apt install software-properties-common apt-transport-https wget ca-certificates gnupg2 -y
-sudo wget -O- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add - | gpg --dearmor | sudo tee /usr/share/keyrings/anydesk.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
-
-wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
-sudo tee "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
-sudo apt update
-sudo apt install anydesk -y
-
-# instalação Spotify
-curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update && sudo apt-get install spotify-client -y
-
 ## Configurando VSCode como editor padrão
 sudo update-alternatives --set editor /usr/bin/code
 # # Se o Visual Studio Code não aparecer como alternativa ao editor, você precisará registrá-lo:
 # sudo update-alternatives --install /usr/bin/editor editor $(which code) 10
-
-# Criando instância 32 bits do wine
-sudo rm -rf "$PASTA_USUARIO/.wine"
-WINEPREFIX="$PASTA_USUARIO/.wine" WINEARCH=win32 wine wineboot
 
 ## Parar e remover serviço apache instalado com PHP 8 #
 sudo /etc/init.d/apache2 stop
@@ -235,9 +152,6 @@ sudo apt update -y
 sudo pkcon update -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
-
-## Atalho Nodejs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 ## Instalacao Composer #
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
