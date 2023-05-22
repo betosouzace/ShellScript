@@ -9,6 +9,9 @@ fi
 # Define o ID do container
 container_id="$1"
 
+# Para o container específico, se estiver em execução
+docker stop "$container_id"
+
 # Obtém todos os volumes associados ao container
 volumes=$(docker volume ls -q -f "label=com.docker.compose.project=$container_id")
 
