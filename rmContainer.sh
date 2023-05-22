@@ -31,5 +31,8 @@ for imagem in $imagens; do
   docker image rm "$imagem"
 done
 
-# Remove as redes associadas ao container
-docker network rm $(docker network ls -q -f "label=com.docker.compose.project=$container_id")
+# Remove as redes associadas ao container, se existirem
+docker network inspect "$container_id" >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  docker network rm $(docker network ls -q -f "label=com.docker.compose.project=$container_id")
+fi
