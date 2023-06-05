@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
+# mensagem de inicio
+echo " "
+echo "Atualizando o sistema..."
+echo " "
+
 ## Instalacao Composer #
+echo " "
+echo "Instalando o Composer..."
+echo " "
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
