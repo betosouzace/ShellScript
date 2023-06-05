@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ $EUID -eq 0 ]]; then
-  clear
-  echo "                       !!! ATENÇÃO !!!"
-  echo "              NÃO execute este script como root!"
-  echo "              Presione qualquer tecla para sair..."
-  read -s -n 1 -p " "
-  exit
-fi
-
-# ----------------------------- VARIÁVEIS ----------------------------- #
-
 ## Instalacao Composer #
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
