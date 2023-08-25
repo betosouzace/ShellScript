@@ -30,6 +30,7 @@ sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
 
 # instalação PHP
 sudo add-apt-repository ppa:ondrej/php -y
+sudo add-apt-repository ppa:ondrej/apache2 -y
 sudo apt update
 sudo apt install openssl mcrypt php8.2 php8.2-mcrypt php8.2-common php8.2-mysql php8.2-sqlite3 php8.2-dom php8.2-bcmath php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-dev php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-cgi php8.2-pgsql php8.2-ldap -y
 sudo apt install php8.2-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
@@ -135,6 +136,58 @@ sudo echo "<VirtualHost *:80>
     CustomLog ${APACHE_LOG_DIR}/$dominio-access.log combined
 </VirtualHost>" > /etc/apache2/sites-available/$dominio.conf
 
+# configura o apache para o subdominio blog.$dominio
+sudo a2ensite blog.$dominio.conf
+sudo systemctl reload apache2
+
+# configura o apache para o subdominio app.$dominio
+sudo a2ensite app.$dominio.conf
+sudo systemctl reload apache2
+
+# configura o apache para o dominio principal
+sudo a2ensite $dominio.conf
+sudo systemctl reload apache2
+
+# reinicia o sistema
+sudo reboot
+
+
+# configura o keycloak no apache no subdominio auth.$dominio
+sudo apt install libapache2-mod-auth-openidc -y
+sudo echo "<VirtualHost *:80>
+    ServerName auth.$dominio
+    ServerAlias www.auth.$dominio
+    DocumentRoot /var/www/auth
+    <Directory /var/www/auth>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/auth.$dominio-error.log
+    CustomLog ${APACHE_LOG_DIR}/auth.$dominio-access.log combined
+</VirtualHost>" > /etc/apache2/sites-available/auth.$dominio.conf
+
+# configura o apache para o subdominio auth.$dominio
+sudo a2ensite auth.$dominio.conf
+sudo systemctl reload apache2
+
+# configura o apache para o subdominio blog.$dominio
+sudo a2ensite blog.$dominio.conf
+sudo systemctl reload apache2
+
+# configura o apache para o subdominio app.$dominio
+sudo a2ensite app.$dominio.conf
+sudo systemctl reload apache2
+
+# configura o apache para o dominio principal
+sudo a2ensite $dominio.conf
+sudo systemctl reload apache2
+
+sudo reboot
+
+# termina a execução do script
+exit
+
 # instalação keycloak
 sudo mkdir -p /usr/lib/jvm
 sudo wget https://download.java.net/java/GA/jdk20.0.2/6e380f22cbe7469fa75fb448bd903d8e/9/GPL/openjdk-20.0.2_linux-x64_bin.tar.gz -P /usr/lib/jvm
@@ -201,51 +254,4 @@ sudo echo "<VirtualHost *:80>
 
 # configura o apache para o subdominio auth.$dominio
 sudo a2ensite auth.$dominio.conf
-sudo systemctl reload apache2
-
-# configura o apache para o subdominio blog.$dominio
-sudo a2ensite blog.$dominio.conf
-sudo systemctl reload apache2
-
-# configura o apache para o subdominio app.$dominio
-sudo a2ensite app.$dominio.conf
-sudo systemctl reload apache2
-
-# configura o apache para o dominio principal
-sudo a2ensite $dominio.conf
-sudo systemctl reload apache2
-
-# reinicia o sistema
-sudo reboot
-
-
-# configura o keycloak no apache no subdominio auth.$dominio
-sudo apt install libapache2-mod-auth-openidc -y
-sudo echo "<VirtualHost *:80>
-    ServerName auth.$dominio
-    ServerAlias www.auth.$dominio
-    DocumentRoot /var/www/auth
-    <Directory /var/www/auth>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Require all granted
-    </Directory>
-    ErrorLog ${APACHE_LOG_DIR}/auth.$dominio-error.log
-    CustomLog ${APACHE_LOG_DIR}/auth.$dominio-access.log combined
-</VirtualHost>" > /etc/apache2/sites-available/auth.$dominio.conf
-
-# configura o apache para o subdominio auth.$dominio
-sudo a2ensite auth.$dominio.conf
-sudo systemctl reload apache2
-
-# configura o apache para o subdominio blog.$dominio
-sudo a2ensite blog.$dominio.conf
-sudo systemctl reload apache2
-
-# configura o apache para o subdominio app.$dominio
-sudo a2ensite app.$dominio.conf
-sudo systemctl reload apache2
-
-# configura o apache para o dominio principal
-sudo a2ensite $dominio.conf
 sudo systemctl reload apache2
