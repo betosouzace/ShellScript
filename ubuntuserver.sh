@@ -108,6 +108,7 @@ sudo mkdir -p /var/www/blog
 sudo echo "<VirtualHost *:80>
     ServerName blog.$dominio
     ServerAlias www.blog.$dominio
+    Redirect permanent / https://blog.$dominio/
     DocumentRoot /var/www/blog
     <Directory /var/www/blog>
         Options Indexes FollowSymLinks MultiViews
@@ -123,6 +124,7 @@ sudo mkdir -p /var/www/app
 sudo echo "<VirtualHost *:80>
     ServerName app.$dominio
     ServerAlias www.app.$dominio
+    Redirect permanent / https://app.$dominio/
     DocumentRoot /var/www/app/public
     <Directory /var/www/app/public>
         Options Indexes FollowSymLinks MultiViews
@@ -137,6 +139,7 @@ sudo echo "<VirtualHost *:80>
 sudo echo "<VirtualHost *:80>
     ServerName $dominio
     ServerAlias www.$dominio
+    Redirect permanent / https://$dominio/
     DocumentRoot /var/www/html
     <Directory /var/www/html>
         Options Indexes FollowSymLinks MultiViews
@@ -173,10 +176,9 @@ sudo chown -R root:root /var/www/app
 sudo chmod -R 755 /var/www/app
 
 # # cria o certificado gratuito para o apache com o certbot para o dominio informado
-# sudo certbot --apache
+# sudo certbot --apache -d $dominio -d www.$dominio -d blog.$dominio -d app.$dominio
 # # renova o certificado SSL
 # sudo certbot renew --dry-run
-
 
 # reinicia o sistema
 sudo reboot
