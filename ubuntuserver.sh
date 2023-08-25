@@ -13,7 +13,6 @@ sudo apt install lsb-release ca-certificates apt-transport-https software-proper
 sudo apt install build-essential -y
 sudo apt install dos2unix -y
 sudo apt install p7zip-rar p7zip-full lzma lzma-dev rar unrar-free p7zip ark ncompress -y
-sudo apt install ubuntu-restricted-extras -y
 sudo apt install network-manager-openvpn -y
 sudo apt install neovim -y
 sudo apt install clang -y
