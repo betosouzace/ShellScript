@@ -72,6 +72,14 @@ sudo ufw allow 5900/tcp
 sudo ufw allow 3389/tcp
 # libera porta para ftp
 sudo ufw allow 21/tcp
+# Libera as conexões http e https
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 'Apache Full'
+sudo ufw delete allow 'Apache'
+
+# seta o timezone para America/Sao_Paulo
+sudo timedatectl set-timezone America/Sao_Paulo
 
 # instala e configura o apache
 sudo apt install apache2 -y
@@ -85,11 +93,14 @@ sudo systemctl enable mariadb
 sudo systemctl start mariadb
 sudo systemctl status mariadb
 
-# cria o certificado gratuito para o apache com o certbot para o dominio informado
+# configura o acesso remoto ao mariadb
+sudo sed -i 's/bind-address/#bind-address/g' /etc/mysql/mariadb.conf.d/50-server.cnf
+sudo systemctl restart mariadb
+
+# configura o domínio
 sudo apt install certbot python3-certbot-apache -y
 echo "Informe o nome do dominio para o certificado SSL"
 read dominio
-sudo certbot --apache -d $dominio
 
 # configura os subdominios do apache
 # configuração do subdominio blog.$dominio
@@ -147,6 +158,25 @@ sudo systemctl reload apache2
 # configura o apache para o dominio principal
 sudo a2ensite $dominio.conf
 sudo systemctl reload apache2
+
+# configura o acesso ftp a pasta /var/www/html para o usuario root e o grupo root
+sudo chown -R root:root /var/www/html
+sudo chmod -R 755 /var/www/html
+
+# configura o acesso ftp a pasta /var/www/app para o usuario root e o grupo root
+sudo chown -R root:root /var/www/app
+sudo chmod -R 755 /var/www/app
+
+#  baixa o repositório do laravel para a pasta /var/www/app de https://github.com/betosouzace/ultimate.git
+sudo git clone https://github.com/betosouzace/ultimate.git /var/www/app
+sudo chown -R root:root /var/www/app
+sudo chmod -R 755 /var/www/app
+
+# # cria o certificado gratuito para o apache com o certbot para o dominio informado
+# sudo certbot --apache
+# # renova o certificado SSL
+# sudo certbot renew --dry-run
+
 
 # reinicia o sistema
 sudo reboot
