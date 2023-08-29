@@ -32,9 +32,12 @@
 # sudo add-apt-repository ppa:ondrej/php -y
 # sudo add-apt-repository ppa:ondrej/apache2 -y
 # sudo apt update
-# sudo apt install openssl mcrypt php8.2 php8.2-mcrypt php8.2-common php8.2-mysql php8.2-sqlite3 php8.2-dom php8.2-bcmath php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-dev php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-cgi php8.2-pgsql php8.2-ldap -y
-# sudo apt install php8.2-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
-# sudo apt install php8.2 php8.2-mysql php8.2-sqlite3 php8.2-dom php8.2-bcmath php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-dev php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-cgi php8.2-pgsql php8.2-ldap -y
+# desisntalação PHP 8.2 para instalação do PHP 8.1
+sudo apt purge php8.1 php8.1-common php8.1-cli php8.1-fpm php8.1-json php8.1-opcache php8.1-readline php8.1-mysql php8.1-mbstring php8.1-xml php8.1-zip php8.1-curl php8.1-gd php8.1-imagick php8.1-intl php8.1-bcmath php8.1-ldap php8.1-imap php8.1-soap php8.1-xmlrpc php8.1-sqlite3 php8.1-pgsql php8.1-dev php8.1-mcrypt php8.1-sqlite3 php8.1-dom php8.1-bcmath php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-intl php8.1-cgi php8.1-pgsql php8.1-ldap -y
+
+sudo apt install openssl mcrypt php8.0 php8.0-mcrypt php8.0-common php8.0-mysql php8.0-sqlite3 php8.0-dom php8.0-bcmath php8.0-xml php8.0-xmlrpc php8.0-curl php8.0-gd php8.0-imagick php8.0-cli php8.0-dev php8.0-imap php8.0-mbstring php8.0-opcache php8.0-soap php8.0-zip php8.0-intl php8.0-cgi php8.0-pgsql php8.0-ldap -y
+sudo apt install php8.0-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
+sudo apt install php8.0 php8.0-mysql php8.0-sqlite3 php8.0-dom php8.0-bcmath php8.0-xml php8.0-xmlrpc php8.0-curl php8.0-gd php8.0-imagick php8.0-cli php8.0-dev php8.0-imap php8.0-mbstring php8.0-opcache php8.0-soap php8.0-zip php8.0-intl php8.0-cgi php8.0-pgsql php8.0-ldap -y
 
 # # Definindo zsh como shell padrão
 # chsh -s $(which zsh)
@@ -43,12 +46,12 @@
 # chsh -s /bin/zsh
 # sudo chsh -s /bin/zsh
 
-# ## Instalacao Composer #
-# php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-# php composer-setup.php
-# php -r "unlink('composer-setup.php');"
-# sudo mv composer.phar /usr/local/bin/composer
-# composer self-update
+## Instalacao Composer #
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+composer self-update
 
 # configuração do apache
 sudo a2enmod rewrite
@@ -83,6 +86,7 @@ sudo timedatectl set-timezone America/Sao_Paulo
 
 # instala e configura o apache
 sudo apt install apache2 -y
+sudo apt install libapache2-mod-php8.0 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
 sudo systemctl status apache2
@@ -161,6 +165,11 @@ sudo systemctl reload apache2
 # configura o apache para o dominio principal
 sudo a2ensite $dominio.conf
 sudo systemctl reload apache2
+
+# configura a inicialização do php e do apache junto com o sistema
+sudo systemctl enable apache2
+sudo systemctl enable php8.0-fpm
+
 
 # configura o acesso ftp a pasta /var/www/html para o usuario root e o grupo root
 sudo chown -R root:root /var/www/html
