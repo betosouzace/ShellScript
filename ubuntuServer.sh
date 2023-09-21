@@ -48,6 +48,11 @@ php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
 composer self-update
 
+# Atualizando o sistema
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
+
 # Definindo zsh como shell padrão
 chsh -s $(which zsh)
 chsh -s /usr/bin/zsh
