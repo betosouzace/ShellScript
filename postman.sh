@@ -11,6 +11,11 @@ fi
 
 wget https://dl.pstmn.io/download/latest/linux_64 -O /tmp/postman.tar.gz
 
+sudo rm -rf /opt/Postman
+sudo rm -rf /usr/share/applications/postman*.desktop
+sudo rm -rf /usr/share/applications/Postman*.desktop
+sudo rm -rf /usr/bin/postman
+
 sudo tar -xzf /tmp/postman.tar.gz -C /opt
 
 sudo chmod -R 777 /opt/Postman
