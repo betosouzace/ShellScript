@@ -22,9 +22,23 @@ sudo chmod -R 777 /opt/Postman
 
 sudo ln -s /opt/Postman/app/Postman /usr/bin/postman
 
-echo -e '[Desktop Entry]\n Encoding=UTF-8\n Name=Postman\n Exec=/opt/Postman/app/Postman %U\n Icon=/opt/Postman/app/resources/app/assets/icon.png\n Terminal=false\n Type=Application\n Categories=Development;' | sudo tee /usr/share/applications/postman.desktop
+echo -e "[Desktop Entry]\nEncoding=UTF-8\nName=Postman\nExec=/opt/Postman/app/Postman %U\nIcon=/opt/Postman/app/resources/app/assets/icon.png\nTerminal=false\nType=Application\nCategories=Development;" | sudo tee /usr/share/applications/Postman.desktop > /dev/null
+
+rm -rf /tmp/postman.tar.gz
 
 echo " "
-echo "Instalação concluída"
-read -s -n 1 -p "Pressione Enter para sair..."
+echo "Postman instalado com sucesso!"
+echo " "
+echo "Para executar o Postman, você pode procurar no menu de aplicativos, ou executar o comando abaixo:"
+echo " "
+echo "    postman"
+echo " "
+echo "Para desinstalar o Postman, execute o comando abaixo:"
+echo " "
+echo "    sudo rm -rf /opt/Postman /usr/share/applications/Postman*.desktop /usr/share/applications/Postman*.desktop /usr/bin/postman"
+echo " "
+echo "Pressione qualquer tecla para sair..."
+read -s -n 1 -p " "
+
+clear
 exit
