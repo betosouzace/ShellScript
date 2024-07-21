@@ -114,6 +114,10 @@ sudo pkcon update -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
+# Ativando a opção de ativar nunlock na inicialização
+sudo apt install numlockx -y
+# Configurações > Janela de início de sessão > Configurações > Ativar Nun Lock do teclado
+
 # As instalações estão separados para em caso de erro de algum pacote, os outros não deixem de ser instalados
 sudo apt install apt-transport-https -y
 sudo apt install build-essential -y
