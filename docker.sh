@@ -11,7 +11,7 @@ fi
 
 # ----------------------------- VARIÁVEIS ----------------------------- #
 
-read -p "Informe a versão do ubuntu (focal ou jammy) :" DISTRO
+read -p "Informe a versão do ubuntu (focal, jammy ou noble) :" DISTRO
 
 # Docker
 sudo apt-get remove docker docker-engine docker.io containerd runc -y
