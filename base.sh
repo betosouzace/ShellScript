@@ -45,11 +45,11 @@ sudo apt install g++ -y
 sudo apt install make -y
 
 # Definindo zsh como shell padrão
-chsh -s $(which zsh)
-chsh -s /usr/bin/zsh
-sudo usermod -s /usr/bin/zsh $(whoami)
-chsh -s /bin/zsh
-sudo chsh -s /bin/zsh
+# chsh -s $(which zsh)
+# chsh -s /usr/bin/zsh
+# sudo usermod -s /usr/bin/zsh $(whoami)
+# chsh -s /bin/zsh
+# sudo chsh -s /bin/zsh
 
 # Docker
 sudo apt-get remove docker docker-engine docker.io containerd runc -y
