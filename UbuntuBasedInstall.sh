@@ -11,19 +11,7 @@ fi
 
 # ----------------------------- VARIÁVEIS ----------------------------- #
 
-read -p "Digite o username GIT :" GIT_USER
-read -p "Digite o email GIT :" GIT_EMAIL
-
-# GIT_USER="seuUsuarioGit"
-# GIT_EMAIL="seuemailgit@email.com"
-
 sudo apt install git -y
-
-git config --global user.name "$GIT_USER"
-git config --global user.email "$GIT_EMAIL"
-git config --global core.editor vim
-git config --global init.defaultBranch "main"
-git config --list
 
 PASTA_USUARIO=$HOME
 
@@ -40,7 +28,8 @@ URL_4K_VIDEO_DOWNLOADER="https://dl.4kdownload.com/app/4kvideodownloader_4.18.5-
 URL_FDM="https://dn3.freedownloadmanager.org/6/latest/freedownloadmanager.deb"
 URL_SKYPE="https://go.skype.com/skypeforlinux-64.deb"
 URL_TERMIUS="https://autoupdate.termius.com/linux/Termius.deb"
-URL_WORKB="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community_8.0.27-1ubuntu20.04_amd64.deb"
+URL_WORKB="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community_8.0.40-1ubuntu24.04_amd64.deb"
+URL_WORKB2="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-dbgsym_8.0.40-1ubuntu24.04_amd64.deb"
 
 DIRETORIO_DOWNLOADS="$PASTA_USUARIO/Downloads/programas"
 
@@ -84,7 +73,7 @@ sudo add-apt-repository "$PPA_PHP" -y
 sudo apt-add-repository "$PPA_GRAPHICS_DRIVERS" -y
 wget -nc "$URL_WINE_KEY"
 sudo apt-key add winehq.key
-sudo apt-add-repository "deb $URL_PPA_WINE focal main"
+sudo apt-add-repository "deb $URL_PPA_WINE noble main"
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
@@ -94,13 +83,11 @@ sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && s
 
 ## Download e instalaçao de programas externos ##
 mkdir "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_GOOGLE_CHROME" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_4K_VIDEO_DOWNLOADER" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_FDM" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_VCODE" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_TERMIUS" -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_SKYPE" -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_WORKB" -P "$DIRETORIO_DOWNLOADS"
+wget -c "$URL_WORKB2" -P "$DIRETORIO_DOWNLOADS"
 
 ## Experimental, não sei se vai funcionar
 sudo apt install $DIRETORIO_DOWNLOADS/*.deb -y
@@ -194,21 +181,11 @@ sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  focal stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  noble stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo groupadd docker
 sudo usermod -aG docker $USER
-
-# Anydesk
-sudo apt install software-properties-common apt-transport-https wget ca-certificates gnupg2 -y
-sudo wget -O- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add - | gpg --dearmor | sudo tee /usr/share/keyrings/anydesk.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
-
-wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
-sudo tee "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
-sudo apt update
-sudo apt install anydesk -y
 
 # instalação Spotify
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
@@ -254,16 +231,8 @@ composer self-update
 # sudo rm /etc/apt/preferences.d/nosnap.pref
 # sudo apt install snapd
 
-flatpak install flathub com.getpostman.Postman -y
-flatpak update
-
 ## Apagando pasta de Downloads #
 sudo rm -rf "$DIRETORIO_DOWNLOADS"
-
-## Configuracao SSH GIT para o github #
-ssh-keygen -t ed25519 -C "$GIT_EMAIL"
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
 
 # ## Para instalar o XAMPP 5.5.38 descomente as linhas abaixo#
 # wget https://ufpr.dl.sourceforge.net/project/xampp/XAMPP%20Linux/5.5.38/xampp-linux-x64-5.5.38-3-installer.run
