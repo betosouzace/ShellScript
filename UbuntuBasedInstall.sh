@@ -154,8 +154,8 @@ sudo apt install net-tools -y
 sudo apt install samba -y
 sudo apt install xrdp -y
 # PHP e extensões necessárias para o Laravel 9
-sudo apt install openssl mcrypt php8.2 php8.2-mcrypt php8.2-common php8.2-mysql php8.2-sqlite3 php8.2-dom php8.2-bcmath php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-dev php8.2-imap php8.2-mbstring php8.2-opcache php8.2-soap php8.2-zip php8.2-intl php8.2-cgi php8.2-pgsql php8.2-ldap -y
-sudo apt install php8.2-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
+sudo apt install openssl mcrypt php8.4 php8.4-mcrypt php8.4-common php8.4-mysql php8.4-sqlite3 php8.4-dom php8.4-bcmath php8.4-xml php8.4-xmlrpc php8.4-curl php8.4-gd php8.4-imagick php8.4-cli php8.4-dev php8.4-imap php8.4-mbstring php8.4-opcache php8.4-soap php8.4-zip php8.4-intl php8.4-cgi php8.4-pgsql php8.4-ldap -y
+sudo apt install php8.4-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
 # sudo apt install nodejs -y
 sudo apt install gcc -y
 sudo apt install g++ -y
@@ -172,6 +172,32 @@ chsh -s /usr/bin/zsh
 sudo usermod -s /usr/bin/zsh $(whoami)
 chsh -s /bin/zsh
 sudo chsh -s /bin/zsh
+
+## Instalação do Postman ##
+echo "Instalando Postman..."
+wget -c "https://dl.pstmn.io/download/latest/linux_64" -O "$PASTA_USUARIO/postman-linux-x64.tar.gz"
+sudo tar -xzf "$PASTA_USUARIO/postman-linux-x64.tar.gz" -C /opt/
+sudo chmod 777 -R /opt/Postman/
+
+# Criando atalho do Postman na área de aplicações do usuário
+cat > "$PASTA_USUARIO/.local/share/applications/Postman.desktop" << 'EOT'
+[Desktop Entry]
+Encoding=UTF-8
+Name=Postman
+Exec=/opt/Postman/app/Postman %U
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOT
+
+chown $USER:$USER "$PASTA_USUARIO/.local/share/applications/Postman.desktop"
+chmod 755 "$PASTA_USUARIO/.local/share/applications/Postman.desktop"
+
+# Removendo o arquivo tar.gz baixado
+rm -f "$PASTA_USUARIO/postman-linux-x64.tar.gz"
+
+echo "Postman instalado com sucesso!"
 
 # Docker
 sudo apt-get remove docker docker-engine docker.io containerd runc -y
