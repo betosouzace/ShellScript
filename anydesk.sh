@@ -9,13 +9,11 @@ if [[ $EUID -eq 0 ]]; then
   exit
 fi
 
-sudo -i
-
 # Anydesk
-wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
-echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
-apt update
-apt install anydesk -y
+wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | gpg --dearmor | sudo tee /usr/share/keyrings/anydesk-archive-keyring.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/anydesk-archive-keyring.gpg] http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
+sudo apt update
+sudo apt install anydesk -y
 
 echo " "
 echo "Atualizações concluídas"
