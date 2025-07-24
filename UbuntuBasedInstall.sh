@@ -242,6 +242,10 @@ php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
 composer self-update
 
+flatpak install flathub it.mijorus.gearlever -y
+
+flatpak install flathub io.podman_desktop.PodmanDesktop -y
+
 # Caso queira instalar o snap descomente as linhas abaixo
 # sudo rm /etc/apt/preferences.d/nosnap.pref
 # sudo apt install snapd
