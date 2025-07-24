@@ -41,6 +41,10 @@ sudo rm /var/cache/apt/archives/lock
 sudo dpkg --add-architecture i386
 
 sudo apt update -y
+
+sudo mintsources
+
+sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
 sudo pkcon update -y
 sudo apt upgrade -y
@@ -166,13 +170,6 @@ sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/php8.sh)"
 
-# Definindo zsh como shell padrão
-chsh -s $(which zsh)
-chsh -s /usr/bin/zsh
-sudo usermod -s /usr/bin/zsh $(whoami)
-chsh -s /bin/zsh
-sudo chsh -s /bin/zsh
-
 ## Instalação do Postman ##
 echo "Instalando Postman..."
 wget -c "https://dl.pstmn.io/download/latest/linux_64" -O "$PASTA_USUARIO/postman-linux-x64.tar.gz"
@@ -240,6 +237,8 @@ composer self-update
 flatpak install flathub it.mijorus.gearlever -y
 
 flatpak install flathub io.podman_desktop.PodmanDesktop -y
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/zsh.sh)"
 
 # Caso queira instalar o snap descomente as linhas abaixo
 # sudo rm /etc/apt/preferences.d/nosnap.pref
