@@ -42,11 +42,16 @@ sudo dpkg --add-architecture i386
 
 sudo apt update -y
 
-sudo mintsources
+if [ -f /etc/linuxmint/info ]; then
+  sudo mintsources
+fi
 
 sudo apt update -y
-# A linha abaixo é utilizada para distros baseadas no KDE Neon
+
+if [ -f /usr/bin/pkcon ]; then
 sudo pkcon update -y
+fi
+
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -80,8 +85,11 @@ sudo apt-key add winehq.key
 sudo apt-add-repository "deb $URL_PPA_WINE noble main"
 
 sudo apt update -y
-# A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update -y
+
+if [ -f /usr/bin/pkcon ]; then
+  sudo pkcon update -y
+fi
+
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -100,8 +108,11 @@ sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
 sudo apt install -f
 
 sudo apt update -y
-# A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update -y
+
+if [ -f /usr/bin/pkcon ]; then
+  sudo pkcon update -y
+fi
+
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -113,8 +124,10 @@ sudo apt install numlockx -y
 sudo apt install apt-transport-https -y
 sudo apt install build-essential -y
 sudo apt install --install-recommends winehq-stable wine-stable wine-stable-i386 wine-stable-amd64 -y
-# A linha abaixo atualiza os codecs do Linux Mint:
-sudo apt install mint-meta-codecs -y
+
+if [ -f /etc/linuxmint/info ]; then
+  sudo apt install mint-meta-codecs -y
+fi
 sudo apt install dos2unix -y
 sudo apt install language-pack-gnome-pt language-pack-kde-pt language-pack-pt-base -y
 sudo apt install winff -y
@@ -219,8 +232,11 @@ WINEPREFIX="$PASTA_USUARIO/.wine" WINEARCH=win32 wine wineboot
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/removeApache.sh)"
 
 sudo apt update -y
-# A linha abaixo é utilizada para distros baseadas no KDE Neon
-sudo pkcon update -y
+
+if [ -f /usr/bin/pkcon ]; then
+  sudo pkcon update -y
+fi
+
 sudo apt upgrade -y
 sudo apt dist-upgrade -y && sudo apt full-upgrade && sudo apt autoremove -y && sudo apt autoclean
 
@@ -234,9 +250,9 @@ php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
 composer self-update
 
-flatpak install flathub it.mijorus.gearlever -y
-
 flatpak install flathub io.podman_desktop.PodmanDesktop -y
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/cursor.sh)"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/zsh.sh)"
 
