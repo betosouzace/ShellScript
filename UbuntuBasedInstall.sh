@@ -153,9 +153,7 @@ sudo apt install zsh -y
 sudo apt install net-tools -y
 sudo apt install samba -y
 sudo apt install xrdp -y
-# PHP e extensões necessárias para o Laravel 9
-sudo apt install openssl mcrypt php8.4 php8.4-mcrypt php8.4-common php8.4-mysql php8.4-sqlite3 php8.4-dom php8.4-bcmath php8.4-xml php8.4-xmlrpc php8.4-curl php8.4-gd php8.4-imagick php8.4-cli php8.4-dev php8.4-imap php8.4-mbstring php8.4-opcache php8.4-soap php8.4-zip php8.4-intl php8.4-cgi php8.4-pgsql php8.4-ldap -y
-sudo apt install php8.4-{mcrypt,common,mysql,sqlite3,dom,bcmath,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl,cgi,pgsql,ldap} -y
+
 # sudo apt install nodejs -y
 sudo apt install gcc -y
 sudo apt install g++ -y
@@ -165,6 +163,8 @@ sudo apt install balena-etcher-electron -y
 sudo apt install code -y # or code-insiders
 # Necessário para o flutter
 sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/php8.sh)"
 
 # Definindo zsh como shell padrão
 chsh -s $(which zsh)
@@ -202,6 +202,8 @@ echo "Postman instalado com sucesso!"
 # Docker
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/docker.sh)"
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/postman.sh)"
+
 # instalação Spotify
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
@@ -217,14 +219,7 @@ sudo rm -rf "$PASTA_USUARIO/.wine"
 WINEPREFIX="$PASTA_USUARIO/.wine" WINEARCH=win32 wine wineboot
 
 ## Parar e remover serviço apache instalado com PHP 8 #
-sudo /etc/init.d/apache2 stop
-sudo systemctl stop apache2.service
-sudo systemctl stop apache2
-sudo systemctl disable apache2
-# # Fedora e derivados RedHat
-# sudo systemctl stop httpd
-# sudo systemctl disable httpd
-sudo apt remove apache2 -y
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/removeApache.sh)"
 
 sudo apt update -y
 # A linha abaixo é utilizada para distros baseadas no KDE Neon
