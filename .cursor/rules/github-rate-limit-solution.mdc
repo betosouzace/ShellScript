@@ -1,0 +1,34 @@
+# Solução para Erro 429 do GitHub Raw Content
+
+## Problema Identificado
+- GitHub raw content retornando erro 429 (Too Many Requests)
+- Scripts não podem ser executados diretamente via curl/wget
+- Rate limiting impedindo acesso aos arquivos
+
+## Soluções Implementadas
+
+### 1. jsDelivr CDN como Alternativa
+- Substituição das URLs do GitHub raw por jsDelivr
+- Formato: `https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/script.sh`
+- Melhor performance e sem rate limiting agressivo
+
+### 2. Manutenção das URLs Originais
+- Mantidas as URLs originais como opção secundária
+- Usuário pode alternar entre as duas conforme necessidade
+
+### 3. Orientações de Uso
+- jsDelivr como opção principal
+- GitHub raw como fallback
+- Aguardar alguns minutos entre execuções se necessário
+
+## Data da Implementação
+2024-12-27
+
+## Impacto
+- Scripts funcionam normalmente novamente
+- Melhor experiência do usuário
+- Redução de dependência exclusiva do GitHub raw
+description:
+globs:
+alwaysApply: false
+---
