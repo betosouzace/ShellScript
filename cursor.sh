@@ -108,8 +108,16 @@ Exec=$HOME/.local/share/cursor/cursor --new-window %F
 Icon=$HOME/.local/share/cursor/co.anysphere.cursor.png
 EOF
             
-            # Create symbolic link for command line access
-            sudo ln -sf "$HOME/.local/share/cursor/cursor" "/usr/local/bin/cursor"
+            # Create wrapper script for command line access (detached from terminal)
+            echo "Creating terminal wrapper script..."
+            sudo tee /usr/local/bin/cursor > /dev/null << 'EOF'
+#!/usr/bin/env bash
+# Cursor wrapper script - launches detached from terminal
+exec setsid "$HOME/.local/share/cursor/cursor" "$@" >/dev/null 2>&1 &
+EOF
+            
+            # Make wrapper executable
+            sudo chmod +x /usr/local/bin/cursor
             
             # Update desktop database and icon cache
             update-desktop-database "$HOME/.local/share/applications/" 2>/dev/null
@@ -119,10 +127,12 @@ EOF
             cd "$HOME"
             rm -rf "$TEMP_DIR"
             rm -f "$HOME/Downloads/Cursor.AppImage"
-            
+    
             echo "Cursor successfully installed to system!"
             echo "Installation directory: $HOME/.local/share/cursor"
+            echo "Terminal wrapper: /usr/local/bin/cursor (detached execution)"
             echo "You can now launch it from applications menu or run 'cursor' in terminal."
+            echo "The terminal will be freed when using the 'cursor' command."
             ;;
         2)
             # Open with GearLever

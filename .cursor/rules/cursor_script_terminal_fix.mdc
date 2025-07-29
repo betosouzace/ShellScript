@@ -1,0 +1,45 @@
+# Cursor Terminal Wrapper Fix
+
+## Date: 2024
+## File: cursor.sh
+
+### Issue Resolved:
+**Problem**: When executing `cursor` or `cursor .` in terminal, the terminal remained occupied and closing the terminal would also close Cursor application.
+
+**User's Previous Solution**: Had a function in `.zshrc`:
+```bash
+function cursor {
+  setsid /usr/bin/cursor "$@" >/dev/null 2>&1 &
+}
+```
+
+### Implementation:
+Created a wrapper script at `/usr/local/bin/cursor` that replaces the simple symlink, providing detached terminal execution.
+
+**Wrapper Script Content**:
+```bash
+#!/usr/bin/env bash
+# Cursor wrapper script - launches detached from terminal
+exec setsid "$HOME/.local/share/cursor/cursor" "$@" >/dev/null 2>&1 &
+```
+
+### Technical Details:
+- **Location**: `/usr/local/bin/cursor`
+- **Method**: `setsid` creates new session, detaching from terminal
+- **Output**: Redirected to `/dev/null` to prevent terminal output
+- **Execution**: Background execution with `&`
+- **Arguments**: All arguments passed through with `"$@"`
+
+### Benefits:
+- Terminal is immediately freed after running `cursor` command
+- Cursor continues running even if terminal is closed
+- Works with any arguments (`cursor .`, `cursor file.txt`, etc.)
+- Universal solution (works with bash, zsh, fish, etc.)
+- No need to modify user's shell configuration files
+
+### User Experience:
+- Run `cursor` or `cursor .` and terminal is immediately available
+- Cursor opens in background without cluttering terminal
+- No dependency on specific shell configurations
+- Consistent behavior across different terminal environments
+ 
