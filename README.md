@@ -25,6 +25,18 @@ via wget
 sh -c "$(wget https://raw.githubusercontent.com/betosouzace/ShellScript/master/docker.sh -O -)"
 ```
 
+### Instalar e configurar o cursor
+
+via curl
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/cursor.sh)"
+```
+
+via wget
+```bash
+sh -c "$(wget https://raw.githubusercontent.com/betosouzace/ShellScript/master/cursor.sh -O -)"
+```
+
 ### Instalar e configurar o ngrok
 [Acesse antes o site do ngrok para gerar seu token](https://dashboard.ngrok.com/login)
 
