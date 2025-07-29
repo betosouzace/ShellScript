@@ -181,7 +181,7 @@ sudo apt install code -y # or code-insiders
 # Necessário para o flutter
 sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/php8.sh)"
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/php8.sh)"
 
 ## Instalação do Postman ##
 echo "Instalando Postman..."
@@ -210,9 +210,9 @@ rm -f "$PASTA_USUARIO/postman-linux-x64.tar.gz"
 echo "Postman instalado com sucesso!"
 
 # Docker
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/docker.sh)"
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/docker.sh)"
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/postman.sh)"
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/postman.sh)"
 
 # instalação Spotify
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
@@ -229,7 +229,7 @@ sudo rm -rf "$PASTA_USUARIO/.wine"
 WINEPREFIX="$PASTA_USUARIO/.wine" WINEARCH=win32 wine wineboot
 
 ## Parar e remover serviço apache instalado com PHP 8 #
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/removeApache.sh)"
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/removeApache.sh)"
 
 sudo apt update -y
 
@@ -252,9 +252,9 @@ composer self-update
 
 flatpak install flathub io.podman_desktop.PodmanDesktop -y
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/cursor.sh)"
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/cursor.sh)"
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/betosouzace/ShellScript/master/zsh.sh)"
+sh -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/betosouzace/ShellScript@master/zsh.sh)"
 
 # Caso queira instalar o snap descomente as linhas abaixo
 # sudo rm /etc/apt/preferences.d/nosnap.pref
